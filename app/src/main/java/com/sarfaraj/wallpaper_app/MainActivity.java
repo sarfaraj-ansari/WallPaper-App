@@ -57,17 +57,21 @@ public class MainActivity extends AppCompatActivity implements Category_RV_Adapt
         wallpaper_rv_adapter=new Wallpaper_Rv_Adapter(wallpaper_arraylist, this);
         binding.idWallpaperRV.setAdapter(wallpaper_rv_adapter);
 
-        getWallpapers();
+        //Getting default wallpapers
+        String default_wallpaper_url="https://api.pexels.com/v1/curated?per_page=80&page=1";
+        getWallpapers(default_wallpaper_url);
 
         binding.idImageViewSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searched_text =binding.idEdtSearchBar.getText().toString();
+                String searched_text =binding.idEdtSearchBar.getText().toString().trim();
                 if(searched_text.isEmpty()){
                     Toast.makeText(MainActivity.this, "Please Enter the Search Query", Toast.LENGTH_LONG).show();
                 }else{
+                    //Getting wallpapers by user seach
+                    String searched_wallpaper_url="https://api.pexels.com/v1/search?query="+searched_text+"&page=1&per_page=80";
+                    getWallpapers(searched_wallpaper_url);
 
-                    getImagebySearch(searched_text);
 
                 }
             }
@@ -90,10 +94,10 @@ public class MainActivity extends AppCompatActivity implements Category_RV_Adapt
 
     }
 
-    private void getWallpapers(){
+    private void getWallpapers(String url){
         wallpaper_arraylist.clear();
         binding.idProgressbar.setVisibility(View.VISIBLE);
-       String url="https://api.pexels.com/v1/curated?per_page=80&page=1";
+     //  String url="https://api.pexels.com/v1/curated?per_page=80&page=1";
 
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements Category_RV_Adapt
             @Override
             public void onErrorResponse(VolleyError error) {
                 binding.idProgressbar.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, "Facing Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Facing issue while fetching wallpapers", Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements Category_RV_Adapt
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void getImagebySearch(String searched_text) {
+    /*private void getImagebySearch(String searched_text) {
         wallpaper_arraylist.clear();
         binding.idProgressbar.setVisibility(View.VISIBLE);
         String url ="https://api.pexels.com/v1/search?query="+searched_text+"&page=1&per_page=80";
@@ -175,8 +179,7 @@ public class MainActivity extends AppCompatActivity implements Category_RV_Adapt
 
         RequestQueue requestQueue=Volley.newRequestQueue(MainActivity.this);
         requestQueue.add(jsonObjectRequest);
-    }
-
+    } */
     @Override
     public void categoryItemClicked(int position) {
 
