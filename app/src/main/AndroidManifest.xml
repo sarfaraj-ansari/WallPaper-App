@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WallPaper_App">
         <activity
-            android:name=".Wallpaper_Activity"
+            android:name=".Set_Wallpaper_Activity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

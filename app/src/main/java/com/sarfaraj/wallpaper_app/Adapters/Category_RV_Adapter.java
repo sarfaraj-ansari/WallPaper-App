@@ -20,10 +20,12 @@ public class Category_RV_Adapter extends RecyclerView.Adapter<Category_RV_Adapte
 
     ArrayList<Category_Model> category_arraylist;
     Context context;
+    onCategoryClicked categoryClicked;
 
-    public Category_RV_Adapter(ArrayList<Category_Model> category_arraylist, Context context) {
+    public Category_RV_Adapter(ArrayList<Category_Model> category_arraylist, Context context, onCategoryClicked itemClicked) {
         this.category_arraylist = category_arraylist;
         this.context = context;
+        this.categoryClicked =itemClicked;
     }
 
     @NonNull
@@ -45,6 +47,7 @@ public class Category_RV_Adapter extends RecyclerView.Adapter<Category_RV_Adapte
             @Override
             public void onClick(View v) {
 
+                categoryClicked.categoryItemClicked(position);
             }
         });
     }
@@ -65,4 +68,9 @@ public class Category_RV_Adapter extends RecyclerView.Adapter<Category_RV_Adapte
             textView=itemView.findViewById(R.id.id_TV_category);
         }
     }
+
+    public interface onCategoryClicked {
+        void categoryItemClicked(int position);
+    }
+
 }
