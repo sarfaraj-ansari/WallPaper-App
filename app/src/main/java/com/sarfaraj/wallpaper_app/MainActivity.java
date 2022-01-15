@@ -183,5 +183,7 @@ public class MainActivity extends AppCompatActivity implements Category_RV_Adapt
     @Override
     public void categoryItemClicked(int position) {
 
+        String category=categoryModelArrayList.get(position).getCategory_txt();
+        getWallpapers("https://api.pexels.com/v1/search?query="+category+"&page=1&per_page=80");
     }
 }

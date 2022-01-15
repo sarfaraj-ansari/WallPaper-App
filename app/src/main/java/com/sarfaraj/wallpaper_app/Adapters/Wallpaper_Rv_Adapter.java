@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.sarfaraj.wallpaper_app.R;
-import com.sarfaraj.wallpaper_app.Set_Wallpaper_Activity;
+import com.sarfaraj.wallpaper_app.Set_WallPaper_Activity;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public class Wallpaper_Rv_Adapter extends RecyclerView.Adapter<Wallpaper_Rv_Adap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, Set_Wallpaper_Activity.class);
+                Intent intent=new Intent(context, Set_WallPaper_Activity.class);
                 intent.putExtra("imgUrl",wallPaper_ArrayList.get(position));
                 context.startActivity(intent);
             }
